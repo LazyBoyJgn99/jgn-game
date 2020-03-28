@@ -59,6 +59,7 @@ export default class Game1 extends Component {
 
     /**
      * 设置焦点
+     * @param util
      */
     setFocus = (util) => {
         this.focus = util;
