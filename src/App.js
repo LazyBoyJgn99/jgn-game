@@ -43,10 +43,10 @@ class App extends Component {
                                 <Col span={6}>
                                 </Col>
                                 <Col span={6}>
-                                    <Link to={"/game1"} id={"goToGame1"} >game1</Link>
+                                    <Link to={"/game1"} id={"goToGame1"} >构造与继承</Link>
                                 </Col>
                                 <Col span={6}>
-                                    <Link to={"/game2"} id={"goToGame2"}>game2</Link>
+                                    <Link to={"/game2"} id={"goToGame2"}>命令模式</Link>
                                 </Col>
                                 <Col span={6}>
                                     <Link to={"/game3"} id={"goToGame3"}>game3</Link>
