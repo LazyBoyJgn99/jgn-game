@@ -1,47 +1,73 @@
 import Command from "@/pages/baseComponent/Command";
 
-//不需要撤销的写法
+/**
+ * 构造的方式，有撤销功能
+ */
 
 /**
  * 向右移动命令
  * @constructor
  */
-export function GoRightCommand (){
-    this.execute = function goRight(focus) {//向右移动函数
-        focus.move(focus.left+focus.v,focus.top);
-    }
+export function GoRightCommand (received){
+    this.received = received;
+    this.beforeLeft = received.left;//记录原先的X坐标
+    this.beforeTop = received.top;//记录原先的Y坐标
+    this.execute = function goRight() {//向右移动函数
+        this.received.move(this.received.left + this.received.v, this.received.top);
+    };
+    this.undo = function () {//撤销函数
+        this.received.move(this.beforeLeft, this.beforeTop);
+    };
 }
-GoRightCommand.prototype = new Command({});
+GoRightCommand.prototype = new Command();
 
 /**
  * 向左移动命令
  * @constructor
  */
-export function GoLeftCommand (){
-    this.execute = function goLeft(focus) {//向左移动函数
-        focus.move(focus.left-focus.v,focus.top);
-    }
+export function GoLeftCommand (received){
+    this.received = received;
+    this.beforeLeft = received.left;//记录原先的X坐标
+    this.beforeTop = received.top;//记录原先的Y坐标
+    this.execute = function goLeft() {//向左移动函数
+        this.received.move(this.received.left - this.received.v, this.received.top);
+    };
+    this.undo = function () {//撤销函数
+        this.received.move(this.beforeLeft, this.beforeTop);
+    };
 }
-GoLeftCommand.prototype = new Command({});
+GoLeftCommand.prototype = new Command();
 
 /**
  * 向上移动命令
  * @constructor
  */
-export function GoUpCommand (){
-    this.execute = function goUp(focus) {//向上移动函数
-        focus.move(focus.left,focus.top-focus.v);
-    }
+export function GoUpCommand (received){
+    this.received = received;
+    this.beforeLeft = received.left;//记录原先的X坐标
+    this.beforeTop = received.top;//记录原先的Y坐标
+    this.execute = function goUp() {//向上移动函数
+        this.received.move(this.received.left, this.received.top - this.received.v);
+    };
+    this.undo = function () {//撤销函数
+        this.received.move(this.beforeLeft, this.beforeTop);
+    };
 }
-GoUpCommand.prototype = new Command({});
+GoUpCommand.prototype = new Command();
 
 /**
  * 向上移动命令
  * @constructor
  */
-export function GoDownCommand (){
-    this.execute = function goDown(focus) {//向下移动函数
-        focus.move(focus.left,focus.top+focus.v);
+export function GoDownCommand (received){
+    this.received = received;
+    this.beforeLeft = received.left;//记录原先的X坐标
+    this.beforeTop = received.top;//记录原先的Y坐标
+    this.execute = function goDown() {//向下移动函数
+        this.received.move(this.received.left, this.received.top + this.received.v);
+    };
+    this.undo = function () {//撤销函数
+        this.received.move(this.beforeLeft, this.beforeTop);
     }
 }
-GoDownCommand.prototype = new Command({});
+GoDownCommand.prototype = new Command();

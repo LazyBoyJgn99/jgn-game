@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import Boy from "@/pages/Game1/units/Boy";
-import {GoDownCommand,GoRightCommand,GoLeftCommand,GoUpCommand} from "@/pages/Game2/commands/commands"
-// import {GoDownCommand,GoRightCommand,GoLeftCommand,GoUpCommand} from "@/pages/Game2/commands/commands2"
+// import {GoDownCommand,GoRightCommand,GoLeftCommand,GoUpCommand} from "@/pages/Game2/commands/commands1";//无撤销构造
+// import {GoDownCommand,GoRightCommand,GoLeftCommand,GoUpCommand} from "@/pages/Game2/commands/commands2";//有撤销构造
+import {goDownCommand,goRightCommand,goLeftCommand,goUpCommand} from "@/pages/Game2/commands/commands3";//闭包
 
 export default class Game2 extends Component {
 
@@ -10,16 +11,6 @@ export default class Game2 extends Component {
     boyList = [new Boy({name:"小王"}),new Boy({name:"小北"}),new Boy({name:"小清"}),new Boy({name:"小狗"})];
     boy = new Boy({name:"小明"});
     focus = this.boy;//焦点
-    keyCommand = {//定义好要用到的按键和执行的命令
-        buttonRight_ : GoRightCommand,//键盘右,默认向右移动
-        buttonLeft_ : GoLeftCommand,//键盘左,默认向左移动
-        buttonUp_ : GoUpCommand,//键盘上,默认向上移动
-        buttonDown_ : GoDownCommand,//键盘下,默认向下移动
-        buttonD_ : GoRightCommand,//键盘D,默认向右移动
-        buttonA_ : GoLeftCommand,//键盘A,默认向左移动
-        buttonW_ : GoUpCommand,//键盘W,默认向上移动
-        buttonS_ : GoDownCommand,//键盘S,默认向下移动
-    };
     // commands = {//定义好要用到的命令
     //     goRightCommand : new GoRightCommand(),//向右移动命令
     //     goLeftCommand : new GoLeftCommand(),//向左移动命令
@@ -36,6 +27,16 @@ export default class Game2 extends Component {
     //     buttonW_ : this.commands.goUpCommand,//键盘W,默认向上移动
     //     buttonS_ : this.commands.goDownCommand,//键盘S,默认向下移动
     // };
+    keyCommand = {//定义好要用到的按键和执行的命令
+        buttonRight_ : goRightCommand,//键盘右,默认向右移动
+        buttonLeft_ : goLeftCommand,//键盘左,默认向左移动
+        buttonUp_ : goUpCommand,//键盘上,默认向上移动
+        buttonDown_ : goDownCommand,//键盘下,默认向下移动
+        buttonD_ : goRightCommand,//键盘D,默认向右移动
+        buttonA_ : goLeftCommand,//键盘A,默认向左移动
+        buttonW_ : goUpCommand,//键盘W,默认向上移动
+        buttonS_ : goDownCommand,//键盘S,默认向下移动
+    };
 
     /**
      * state用于储存数据
@@ -68,49 +69,57 @@ export default class Game2 extends Component {
         let command = null;
         switch(e.keyCode) {
             case 39://键盘右箭头被按下
-                command = new this.keyCommand.buttonRight_(this.focus);//new一个命令
+                // command = new this.keyCommand.buttonRight_(this.focus);//new一个命令，构造的方式
+                command = this.keyCommand.buttonRight_(this.focus);//return一个命令，闭包的方式
                 command.execute();//执行这个命令
                 // this.keyCommand.buttonRight_.execute(this.focus);
                 this.setState({});
                 break;
             case 37://键盘左箭头被按下
-                command = new this.keyCommand.buttonLeft_(this.focus);
+                // command = new this.keyCommand.buttonLeft_(this.focus);
+                command = this.keyCommand.buttonLeft_(this.focus);
                 command.execute();
                 // this.keyCommand.buttonLeft_.execute(this.focus);
                 this.setState({});
                 break;
             case 38://键盘上箭头被按下
-                command = new this.keyCommand.buttonUp_(this.focus);
+                // command = new this.keyCommand.buttonUp_(this.focus);
+                command = this.keyCommand.buttonUp_(this.focus);
                 command.execute();
                 // this.keyCommand.buttonUp_.execute(this.focus);
                 this.setState({});
                 break;
             case 40://键盘下箭头被按下
-                command = new this.keyCommand.buttonDown_(this.focus);
+                // command = new this.keyCommand.buttonDown_(this.focus);
+                command = this.keyCommand.buttonDown_(this.focus);
                 command.execute();
                 // this.keyCommand.buttonDown_.execute(this.focus);
                 this.setState({});
                 break;
             case 68://键盘D被按下
-                command = new this.keyCommand.buttonD_(this.focus);
+                // command = new this.keyCommand.buttonD_(this.focus);
+                command = this.keyCommand.buttonD_(this.focus);
                 command.execute();
                 // this.keyCommand.buttonD_.execute(this.focus);
                 this.setState({});
                 break;
             case 65://键盘A被按下
-                command = new this.keyCommand.buttonA_(this.focus);
+                // command = new this.keyCommand.buttonA_(this.focus);
+                command = this.keyCommand.buttonA_(this.focus);
                 command.execute();
                 // this.keyCommand.buttonA_.execute(this.focus);
                 this.setState({});
                 break;
             case 87://键盘W被按下
-                command = new this.keyCommand.buttonW_(this.focus);
+                // command = new this.keyCommand.buttonW_(this.focus);
+                command = this.keyCommand.buttonW_(this.focus);
                 command.execute();
                 // this.keyCommand.buttonW_.execute(this.focus);
                 this.setState({});
                 break;
             case 83://键盘S被按下
-                command = new this.keyCommand.buttonS_(this.focus);
+                // command = new this.keyCommand.buttonS_(this.focus);
+                command = this.keyCommand.buttonS_(this.focus);
                 command.execute();
                 // this.keyCommand.buttonS_.execute(this.focus);
                 this.setState({});
