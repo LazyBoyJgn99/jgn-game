@@ -50,6 +50,8 @@ export default class Game2 extends Component {
     componentDidMount(){
         //添加键盘监听
         document.addEventListener("keydown", this.onKeyDown);
+        console.log(document);
+        console.log(window);
     }
 
     /**

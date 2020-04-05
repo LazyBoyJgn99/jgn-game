@@ -49,7 +49,7 @@ class App extends Component {
                                     <Link to={"/game2"} id={"goToGame2"}>命令模式</Link>
                                 </Col>
                                 <Col span={6}>
-                                    <Link to={"/game3"} id={"goToGame3"}>game3</Link>
+                                    <Link to={"/game3"} id={"goToGame3"}>享元模式</Link>
                                 </Col>
                                 <Link to={"/demo"} id={"goToDemo"}/>
                                 <Link to={"/index"} id={"goToIndex"}/>

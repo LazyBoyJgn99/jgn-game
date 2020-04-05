@@ -1,4 +1,3 @@
-import Command from "@/pages/baseComponent/Command";
 
 /**
  * 闭包的方式
