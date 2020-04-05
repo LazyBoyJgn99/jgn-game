@@ -151,9 +151,9 @@ export default class Game3 extends Component {
      * @returns {*}
      */
     render() {
-        // this.treeList.sort(function (a,b) {
-        //     return b.z - a.z;
-        // });
+        this.treeList.sort(function (a,b) {
+            return b.z - a.z;
+        });
         return (
             <div className = {"game3"}>
                 {
