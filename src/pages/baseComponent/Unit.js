@@ -1,8 +1,8 @@
 import param from "@/pages/Game3/parameter"
 
 function CreateUnit (unit){
-    this.width = unit.width || 1000;//宽度
-    this.height = unit.height || 1000;//高度
+    this.width = unit.width || 100;//宽度
+    this.height = unit.height || 100;//高度
     this.left = unit.left || 100;//最终渲染X坐标
     this.top = unit.top || 100; //最终渲染Y坐标
     this.proportion = unit.proportion || 1;//缩放比例

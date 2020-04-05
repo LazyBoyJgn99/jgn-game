@@ -35,6 +35,8 @@ export default class Game3 extends Component {
         super();
         //渲染
         this.treeList.map((item)=>{
+            item.width = 1000;
+            item.height = 1000;
             item.updateStyle();
         });
     }
