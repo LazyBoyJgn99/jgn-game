@@ -181,7 +181,7 @@ class ImgUnit extends Component{
                     width:unit.width * unit.proportion,
                     height:unit.height * unit.proportion,
                     left:unit.left - unit.width * unit.proportion / 2,
-                    top:unit.top - unit.height* unit.proportion / 2,
+                    top:unit.top - unit.height * unit.proportion / 2,
                     position:"absolute",
                     textAlign:"center",
                     lineHeight:unit.height+"px"
