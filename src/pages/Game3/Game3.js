@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Boy from "@/pages/Game3/units/Boy";
 import Tree from "@/pages/Game3/units/Tree";
 import {goDownCommand,goRightCommand,goLeftCommand,goUpCommand} from "@/pages/Game3/commands/commands";//闭包
 
@@ -47,8 +46,7 @@ export default class Game3 extends Component {
     componentDidMount(){
         //添加键盘监听
         document.addEventListener("keydown", this.onKeyDown);
-        console.log(document);
-        console.log(window);
+        console.log(this.nv);
     }
 
     /**
@@ -177,14 +175,13 @@ class ImgUnit extends Component{
         return <div
             onClick = {onClick}
         >
-
             <img
                 src = {unit.src} alt={"img"}
                 style = {{
                     width:unit.width * unit.proportion,
                     height:unit.height * unit.proportion,
-                    left:unit.left- unit.width * unit.proportion / 2,
-                    top:unit.top- unit.height* unit.proportion / 2,
+                    left:unit.left - unit.width * unit.proportion / 2,
+                    top:unit.top - unit.height* unit.proportion / 2,
                     position:"absolute",
                     textAlign:"center",
                     lineHeight:unit.height+"px"

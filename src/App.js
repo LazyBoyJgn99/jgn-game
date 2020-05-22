@@ -1,5 +1,5 @@
 import React, { Component,Suspense } from 'react';
-import {Layout,Row,Col,Tooltip} from 'antd';
+import {Layout,Row,Col,Tooltip,Select} from 'antd';
 import {HashRouter , Route, Link} from 'react-router-dom';
 import asyncComponent from './AsyncComponent';
 
@@ -30,6 +30,14 @@ class App extends Component {
     };
 
     /**
+     * select组建跳转
+     */
+    routerChange=(value)=>{
+        console.log(value);
+        document.getElementById(value).click();
+    };
+
+    /**
      * REACT生命周期主函数，用于渲染页面
      * @returns {*}
      */
@@ -38,22 +46,40 @@ class App extends Component {
             <div className="App" id="App">
                 <HashRouter>
                         <Suspense fallback={<div>Loading...</div>}>
-                            <Row gutter={16}>
-                                {/**********************************Link**********************************/}
-                                <Col span={6}>
-                                </Col>
-                                <Col span={6}>
-                                    <Link to={"/game1"} id={"goToGame1"} >构造与继承</Link>
-                                </Col>
-                                <Col span={6}>
-                                    <Link to={"/game2"} id={"goToGame2"}>命令模式</Link>
-                                </Col>
-                                <Col span={6}>
-                                    <Link to={"/game3"} id={"goToGame3"}>享元模式</Link>
-                                </Col>
-                                <Link to={"/demo"} id={"goToDemo"}/>
-                                <Link to={"/index"} id={"goToIndex"}/>
-                            </Row>
+                            <Layout.Header style={{background:"#eee"}} >
+                                <img width={120} height={60} src={""} alt={"此处应有Logo"}/>
+                                <div style={{float:"right"}}>Page：
+                                    <Select defaultValue="首页" style={{ width: 120 }} onChange={this.routerChange}>
+                                        <Select.Option value="goToGame1">
+                                            <Link to={"/game1"} id={"goToGame1"} >1.构造与继承</Link>
+                                        </Select.Option>
+                                        <Select.Option value="goToGame2">
+                                            <Link to={"/game2"} id={"goToGame2"}>2.命令模式</Link>
+                                        </Select.Option>
+                                        <Select.Option value="goToGame3" >
+                                            <Link to={"/game3"} id={"goToGame3"}>3.享元模式</Link>
+                                        </Select.Option>
+                                        <Select.Option value="goToIndex" >
+                                            <Link to={"/index"} id={"goToIndex"}>首页</Link>
+                                        </Select.Option>
+                                    </Select>
+                                </div>
+                                <Row gutter={16}>
+                                    {/**********************************Link**********************************/}
+                                    {/*<Col span={6}>*/}
+                                    {/*</Col>*/}
+                                    {/*<Col span={6}>*/}
+                                    {/*    <Link to={"/game1"} id={"goToGame1"} >构造与继承</Link>*/}
+                                    {/*</Col>*/}
+                                    {/*<Col span={6}>*/}
+                                    {/*    <Link to={"/game2"} id={"goToGame2"}>命令模式</Link>*/}
+                                    {/*</Col>*/}
+                                    {/*<Col span={6}>*/}
+                                    {/*    <Link to={"/game3"} id={"goToGame3"}>享元模式</Link>*/}
+                                    {/*</Col>*/}
+                                    <Link to={"/demo"} id={"goToDemo"}/>
+                                </Row>
+                            </Layout.Header>
                             <Layout.Content >
                                     {/**********************************路由**********************************/}
                                     <Route path={"/game1"} component={Game1} />
