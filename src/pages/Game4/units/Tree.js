@@ -1,4 +1,4 @@
-import CreateUnit from "@/pages/baseComponent/Unit";
+import CreateUnit from "@/pages/Game4/units/Unit";
 import treeImg from "@/img/tree.png"
 
 function Tree (tree){

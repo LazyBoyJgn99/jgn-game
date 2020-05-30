@@ -1,13 +1,17 @@
 import React, { Component } from 'react';
-import Tree from "@/pages/Game3/units/Tree";
-import {goDownCommand,goRightCommand,goLeftCommand,goUpCommand} from "@/pages/Game3/commands/commands";//闭包
+import Tree from "@/pages/Game4/units/Tree";
+import {goDownCommand, goRightCommand, goLeftCommand, goUpCommand, jumpCommand} from "@/pages/Game4/commands/commands";
+import {Button} from "antd";
+import spiderImg from "@/img/spider.png"
 
-export default class Game3 extends Component {
+//闭包
+
+export default class Game4 extends Component {
 
 
     commandList = [];//定义一个数组专门储存命令
     remakeList = [];//定义一个数组专门储存撤销的命令
-    treeList = [new Tree({name:"小树"}),new Tree({name:"小树"}),new Tree({name:"小树"}),new Tree({name:"小树"}),new Tree({name:"小树"}),new Tree({name:"小树"}),new Tree({name:"小树"}),new Tree({name:"小树"}),new Tree({name:"小树"}),new Tree({name:"小树"}),new Tree({name:"小树"}),new Tree({name:"小树"}),new Tree({name:"小树"}),new Tree({name:"小树"}),new Tree({name:"小树"}),new Tree({name:"小树"}),new Tree({name:"小树"}),new Tree({name:"小树"})];
+    treeList = [new Tree({name:"小树",src:spiderImg})];
     focus = this.treeList[0];//焦点
     keyCommand = {//定义好要用到的按键和执行的命令
         buttonRight_ : goRightCommand,//键盘右,默认向右移动
@@ -17,7 +21,8 @@ export default class Game3 extends Component {
         buttonD_ : goRightCommand,//键盘D,默认向右移动
         buttonA_ : goLeftCommand,//键盘A,默认向左移动
         buttonW_ : goUpCommand,//键盘W,默认向上移动
-        buttonS_ : goDownCommand,//键盘S,默认向下移动
+        buttonS_ : goDownCommand,//键盘S,默认向下移动,
+        buttonSpace_ : jumpCommand //键盘空格,默认跳跃,
     };
 
     /**
@@ -46,7 +51,6 @@ export default class Game3 extends Component {
     componentDidMount(){
         //添加键盘监听
         document.addEventListener("keydown", this.onKeyDown);
-        console.log(this.nv);
     }
 
     /**
@@ -68,32 +72,28 @@ export default class Game3 extends Component {
             case 39://键盘右箭头被按下
                 command = this.keyCommand.buttonRight_(this.focus);//return一个命令，闭包的方式
                 command.execute();//执行这个命令
-                this.setState({});
                 break;
             case 37://键盘左箭头被按下
                 command = this.keyCommand.buttonLeft_(this.focus);
                 command.execute();
-                this.setState({});
                 break;
             case 38://键盘上箭头被按下
                 command = this.keyCommand.buttonUp_(this.focus);
                 command.execute();
-                this.setState({});
+                this.sortItems();
                 break;
             case 40://键盘下箭头被按下
                 command = this.keyCommand.buttonDown_(this.focus);
                 command.execute();
-                this.setState({});
+                this.sortItems();
                 break;
             case 68://键盘D被按下
                 command = this.keyCommand.buttonD_(this.focus);
                 command.execute();
-                this.setState({});
                 break;
             case 65://键盘A被按下
                 command = this.keyCommand.buttonA_(this.focus);
                 command.execute();
-                this.setState({});
                 break;
             case 87://键盘W被按下
                 command = this.keyCommand.buttonW_(this.focus);
@@ -105,23 +105,25 @@ export default class Game3 extends Component {
                 command.execute();
                 this.setState({});
                 break;
+            case 32://空格键被按下
+                command = this.keyCommand.buttonSpace_(this.focus);
+                command.execute();
+                break;
             case 90://按Z撤销
                 if(this.commandList.length>0){
                     command = this.commandList.pop();//从command数组中取出最新执行的命令
                     command.undo();//执行撤销
                     this.remakeList.push(command);//把命令添加到重做列表
-                    if(this.remakeList.length>100){//限制大小
+                    if(this.remakeList.length > 100){//限制大小
                         this.remakeList.shift();
                     }
                     command = null;//把command置空
-                    this.setState({});
                 }
                 break ;
             case 16://按shift重做
                 if(this.remakeList.length>0){
                     command = this.remakeList.pop();//从remake数组中取出最新执行的命令
                     command.execute();//执行重做
-                    this.setState({});
                 }
                 break ;
             default:
@@ -135,6 +137,17 @@ export default class Game3 extends Component {
         }
     };
 
+    /**
+     * 添加一棵树
+     */
+    add = () => {
+        let tree = new Tree({name:"小树"});
+        tree.width = 1000;
+        tree.height = 1000;
+        this.treeList.push(tree);
+        tree.updateStyle();
+        this.setState({});
+    };
 
     /**
      * 设置焦点
@@ -145,13 +158,19 @@ export default class Game3 extends Component {
     };
 
     /**
+     * 排序
+     */
+    sortItems = () =>{
+        this.treeList.sort(function (a,b) {
+            return b.z - a.z;
+        });
+        this.setState({});
+    };
+    /**
      * REACT生命周期主函数，用于渲染页面
      * @returns {*}
      */
     render() {
-        this.treeList.sort(function (a,b) {
-            return b.z - a.z;
-        });
         return (
             <div className = {"game3"}>
                 {
@@ -165,14 +184,33 @@ export default class Game3 extends Component {
                         />
                     })
                 }
+                <Button onClick={this.add}>add</Button>
             </div>
         );
     }
 }
 
 class ImgUnit extends Component{
+
+    /**
+     * 构造函数
+     * @param props
+     */
+    constructor(props) {
+        super(props);
+        this.props.unit.bindComponent(this);
+    }
+
+    /**
+     * 生命周期函数，props修改时触发
+     * @param nextProps
+     */
+    componentWillReceiveProps(nextProps) {
+        nextProps.unit.bindComponent(this);
+    }
+
     render() {
-        const {onClick,unit}=this.props;
+        const {onClick,unit} = this.props;
         return <div
             onClick = {onClick}
         >

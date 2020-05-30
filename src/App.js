@@ -2,6 +2,7 @@ import React, { Component,Suspense } from 'react';
 import {Layout,Row,Col,Tooltip,Select} from 'antd';
 import {HashRouter , Route, Link} from 'react-router-dom';
 import asyncComponent from './AsyncComponent';
+import Game4 from "@/pages/Game4/Game4";
 
 const Demo = asyncComponent(() => import("./pages/Demo/Demo"));
 const Game1 = asyncComponent(() => import("./pages/Game1/Game1"));
@@ -49,7 +50,7 @@ class App extends Component {
                             <Layout.Header style={{background:"#eee"}} >
                                 <img width={120} height={60} src={""} alt={"此处应有Logo"}/>
                                 <div style={{float:"right"}}>Page：
-                                    <Select defaultValue="首页" style={{ width: 120 }} onChange={this.routerChange}>
+                                    <Select  style={{ width: 120 }} onChange={this.routerChange}>
                                         <Select.Option value="goToGame1">
                                             <Link to={"/game1"} id={"goToGame1"} >1.构造与继承</Link>
                                         </Select.Option>
@@ -58,6 +59,9 @@ class App extends Component {
                                         </Select.Option>
                                         <Select.Option value="goToGame3" >
                                             <Link to={"/game3"} id={"goToGame3"}>3.享元模式</Link>
+                                        </Select.Option>
+                                        <Select.Option value="goToGame4" >
+                                            <Link to={"/game4"} id={"goToGame4"}>4.状态模式</Link>
                                         </Select.Option>
                                         <Select.Option value="goToIndex" >
                                             <Link to={"/index"} id={"goToIndex"}>首页</Link>
@@ -85,6 +89,7 @@ class App extends Component {
                                     <Route path={"/game1"} component={Game1} />
                                     <Route path={"/game2"} component={Game2} />
                                     <Route path={"/game3"} component={Game3} />
+                                    <Route path={"/game4"} component={Game4} />
                                     <Route path={"/demo"} component={Demo} />
                             </Layout.Content>
                             <div
