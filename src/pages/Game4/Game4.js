@@ -166,6 +166,7 @@ export default class Game4 extends Component {
         });
         this.setState({});
     };
+
     /**
      * REACT生命周期主函数，用于渲染页面
      * @returns {*}
