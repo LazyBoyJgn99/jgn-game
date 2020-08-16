@@ -1,8 +1,7 @@
-
 function Command() {
-    this.execute=function (user) {};
-    this.undo=function () {};
-    return this;
+  this.execute = () => {};
+  this.undo = () => {};
+  return this;
 }
 
 export default Command;
