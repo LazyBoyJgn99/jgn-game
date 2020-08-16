@@ -101,7 +101,7 @@ export default class Game1 extends Component {
   }
 }
 
-const BoyUnit = (onClick, unit) => {
+const BoyUnit = ({ onClick, unit }) => {
   return (
     <div
       onClick={onClick}

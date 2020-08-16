@@ -176,7 +176,7 @@ export default class Game3 extends Component {
    * @returns {*}
    */
   render() {
-    this.treeList.sort(function (a, b) {
+    this.treeList.sort((a, b) => {
       return b.z - a.z;
     });
     return (
@@ -197,7 +197,7 @@ export default class Game3 extends Component {
   }
 }
 
-const ImgUnit = (onClick, unit) => {
+const ImgUnit = ({ onClick, unit }) => {
   return (
     <div onClick={onClick}>
       <img

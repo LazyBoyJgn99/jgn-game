@@ -64,8 +64,6 @@ export default class Game2 extends Component {
   componentDidMount() {
     // 添加键盘监听
     document.addEventListener("keydown", this.onKeyDown);
-    console.log(document);
-    console.log(window);
   }
 
   /**
@@ -186,7 +184,6 @@ export default class Game2 extends Component {
    * @returns {*}
    */
   render() {
-    console.log(this.boyList);
     return (
       <div className="game1">
         {this.boyList.map((item, i) => {
@@ -211,7 +208,7 @@ export default class Game2 extends Component {
   }
 }
 
-const BoyUnit = (onClick, unit) => {
+const BoyUnit = ({ onClick, unit }) => {
   return (
     <div
       onClick={onClick}

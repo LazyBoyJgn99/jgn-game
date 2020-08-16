@@ -35,7 +35,6 @@ class App extends Component {
    * select组建跳转
    */
   routerChange = (value) => {
-    console.log(value);
     document.getElementById(value).click();
   };
 
